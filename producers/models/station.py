@@ -25,14 +25,13 @@ class Station(Producer):
         self, station_id, name, color, direction_a=None, direction_b=None
     ):
         self.name = name
-        station_name = (
-            self.name.lower()
-            .replace("/", "_and_")
-            .replace(" ", "_")
-            .replace("-", "_")
-            .replace("'", "")
-        )
-
+        # station_name = (
+        #     self.name.lower()
+        #     .replace("/", "_and_")
+        #     .replace(" ", "_")
+        #     .replace("-", "_")
+        #     .replace("'", "")
+        # )
         super().__init__(
             "org.cta.station.arrivals.v1",
             key_schema=Station.key_schema,

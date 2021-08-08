@@ -2,21 +2,15 @@
 import logging
 import logging.config
 from pathlib import Path
-
 import tornado.ioloop
 import tornado.template
 import tornado.web
-
-
-# Import logging before models to ensure configuration is picked up
-logging.config.fileConfig(f"{Path(__file__).parents[0]}/logging.ini")
-
-
 from consumer import KafkaConsumer
 from models import Lines, Weather
 import topic_check
 
-
+# Import logging before models to ensure configuration is picked up
+logging.config.fileConfig(f"{Path(__file__).parents[0]}/logging.ini")
 logger = logging.getLogger(__name__)
 
 
@@ -101,8 +95,8 @@ def run_server():
             tornado.ioloop.IOLoop.current().spawn_callback(consumer.consume)
 
         tornado.ioloop.IOLoop.current().start()
-    except KeyboardInterrupt as e:
-        logger.info("shutting down server")
+    except Exception as e:
+        logger.info(f"error: {e}")
         tornado.ioloop.IOLoop.current().stop()
         for consumer in consumers:
             consumer.close()

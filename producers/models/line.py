@@ -1,5 +1,4 @@
 """Defines functionality relating to train lines"""
-import collections
 from enum import IntEnum
 import logging
 
@@ -10,7 +9,10 @@ logger = logging.getLogger(__name__)
 
 
 class Line:
-    """Contains Chicago Transit Authority (CTA) Elevated Loop Train ("L") Station Data"""
+    """
+    Contains Chicago Transit Authority (CTA) Elevated Loop Train ("L") Station
+    Data
+    """
 
     colors = IntEnum("colors", "blue green red", start=0)
     num_directions = 2
@@ -19,7 +21,8 @@ class Line:
         self.color = color
         self.num_trains = num_trains
         self.stations = self._build_line_data(station_data)
-        # We must always discount the terminal station at the end of each direction
+        # We must always discount the terminal station at the end of each
+        # direction
         self.num_stations = len(self.stations) - 1
         self.trains = self._build_trains()
 
@@ -68,7 +71,9 @@ class Line:
         return trains
 
     def run(self, timestamp, time_step):
-        """Advances trains between stations in the simulation. Runs turnstiles."""
+        """
+        Advances trains between stations in the simulation. Runs turnstiles.
+        """
         self._advance_turnstiles(timestamp, time_step)
         self._advance_trains()
 
@@ -183,7 +188,10 @@ class Line:
         return -1
 
     def _get_next_idx(self, curr_index, b_direction, step_size=None):
-        """Calculates the next station index. Returns next index and if it is b direction"""
+        """
+        Calculates the next station index. Returns next index and if it is b
+        direction
+        """
         if step_size is None:
             step_size = int(
                 (self.num_stations * Line.num_directions) / self.num_trains

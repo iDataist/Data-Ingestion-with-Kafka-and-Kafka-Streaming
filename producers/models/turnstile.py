@@ -22,14 +22,13 @@ class Turnstile(Producer):
 
     def __init__(self, station):
         """Create the Turnstile"""
-        station_name = (
-            station.name.lower()
-            .replace("/", "_and_")
-            .replace(" ", "_")
-            .replace("-", "_")
-            .replace("'", "")
-        )
-
+        # station_name = (
+        #     station.name.lower()
+        #     .replace("/", "_and_")
+        #     .replace(" ", "_")
+        #     .replace("-", "_")
+        #     .replace("'", "")
+        # )
         super().__init__(
             "org.cta.turnstile.v1",
             key_schema=Turnstile.key_schema,

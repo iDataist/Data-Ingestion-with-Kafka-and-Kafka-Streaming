@@ -7,16 +7,12 @@ from enum import IntEnum
 import logging
 import logging.config
 from pathlib import Path
-
 import pandas as pd
-
-# Import logging before models to ensure configuration is picked up
-logging.config.fileConfig(f"{Path(__file__).parents[0]}/logging.ini")
-
 from connector import configure_connector
 from models import Line, Weather
 
-
+# Import logging before models to ensure configuration is picked up
+logging.config.fileConfig(f"{Path(__file__).parents[0]}/logging.ini")
 logger = logging.getLogger(__name__)
 
 
@@ -91,8 +87,8 @@ class TimeSimulation:
                 ]
                 curr_time = curr_time + self.time_step
                 time.sleep(self.sleep_seconds)
-        except KeyboardInterrupt as e:
-            logger.info("Shutting down")
+        except Exception as e:
+            logger.error(f"error: {e}")
             _ = [line.close() for line in self.train_lines]
 
 

@@ -4,10 +4,7 @@ import json
 import logging
 from pathlib import Path
 import random
-import urllib.parse
-
 import requests
-
 from models.producer import Producer
 
 

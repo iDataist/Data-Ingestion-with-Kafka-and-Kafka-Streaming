@@ -1,17 +1,13 @@
 """Defines core consumer functionality"""
 import logging
 from producers.models.producer import BROKER_URL
-
-import confluent_kafka
 from confluent_kafka import Consumer
 from confluent_kafka.avro import AvroConsumer
-from confluent_kafka.avro.serializer import SerializerError
 from confluent_kafka.cimpl import OFFSET_BEGINNING
 from tornado import gen
 
 
 logger = logging.getLogger(__name__)
-BROKER_URL = "PLAINTEXT://localhost:9092"
 
 
 class KafkaConsumer:
@@ -34,7 +30,7 @@ class KafkaConsumer:
         self.offset_earliest = offset_earliest
         self.broker_properties = {
             "bootstrap.servers": BROKER_URL,
-            "group.id": f"topic_name_pattern",
+            "group.id": f"{topic_name_pattern}",
             "default.topic.config": {"auto.offset.reset": "earliest"},
         }
 
@@ -69,7 +65,9 @@ class KafkaConsumer:
             await gen.sleep(self.sleep_secs)
 
     def _consume(self):
-        """Polls for a message. Returns 1 if a message was received, 0 otherwise"""
+        """
+        Polls for a message. Returns 1 if a message was received, 0 otherwise
+        """
 
         try:
             message = self.consumer.poll(timeout=self.consume_timeout)
