@@ -28,10 +28,16 @@ def configure_connector():
             {
                 "name": CONNECTOR_NAME,
                 "config": {
-                    "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
-                    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+                    "connector.class": (
+                        "io.confluent.connect.jdbc.JdbcSourceConnector"
+                    ),
+                    "key.converter": (
+                        "org.apache.kafka.connect.json.JsonConverter"
+                    ),
                     "key.converter.schemas.enable": "false",
-                    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+                    "value.converter": (
+                        "org.apache.kafka.connect.json.JsonConverter"
+                    ),
                     "value.converter.schemas.enable": "false",
                     "batch.max.rows": "500",
                     "connection.url": "jdbc:postgresql://postgres:5432/cta",
