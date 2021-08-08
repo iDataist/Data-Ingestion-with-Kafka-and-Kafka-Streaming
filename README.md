@@ -1,10 +1,10 @@
-# Building a Stream Processing App to Optimize Public Transportation
+# Data Ingestion with Kafka and Kafka Streaming
 
 ## Project Overview
-I constructed a streaming event pipeline around Apache Kafka and its ecosystem.
-![Project Architecture](images/diagram.png)
-Using public data from the [Chicago Transit Authority](https://www.transitchicago.com/data/), the event pipeline simulates and displays the status of train lines in real time.
+I streamed public transit status from [Chicago Transit Authority](https://www.transitchicago.com/data/) using Kafka and the Kafka ecosystem and built a stream processing application that shows the status of trains in real-time.
 ![Final User Interface](images/ui.png)
+I used Confluent Kafka to produce events, REST Proxy to send events over HTTP, and Kafka Connect to collect data from a Postgres database, all of which are sources into Kafka. Then, I used KSQL to combine related data models into a single topic ready for consumption, and built a simple Python application that ingests data from the Kafka topics for analysis. Finally, I leveraged the Faust Python Stream Processing library to further transform train station data into a more streamlined representation. Using stateful processing, I showed whether passenger volume is increasing, decreasing, or staying steady.
+![Project Architecture](images/diagram.png)
 
 ## Prerequisites
 * Docker
