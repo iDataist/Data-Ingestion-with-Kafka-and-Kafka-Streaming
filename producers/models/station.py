@@ -33,9 +33,8 @@ class Station(Producer):
             .replace("'", "")
         )
 
-        topic_name = f"{station_name}.arrivals.v1"
         super().__init__(
-            topic_name,
+            "org.cta.station.arrivals.v1",
             key_schema=Station.key_schema,
             value_schema=Station.value_schema,
         )
@@ -66,13 +65,16 @@ class Station(Producer):
         )
 
     def __str__(self):
-        return "Station | {:^5} | {:<30} | Direction A: | {:^5} | departing to {:<30} | Direction B: | {:^5} | departing to {:<30} | ".format(
-            self.station_id,
-            self.name,
-            self.a_train.train_id if self.a_train is not None else "---",
-            self.dir_a.name if self.dir_a is not None else "---",
-            self.b_train.train_id if self.b_train is not None else "---",
-            self.dir_b.name if self.dir_b is not None else "---",
+        return (
+            "Station | {:^5} | {:<30} | Direction A: | {:^5} | departing to"
+            " {:<30} | Direction B: | {:^5} | departing to {:<30} | ".format(
+                self.station_id,
+                self.name,
+                self.a_train.train_id if self.a_train is not None else "---",
+                self.dir_a.name if self.dir_a is not None else "---",
+                self.b_train.train_id if self.b_train is not None else "---",
+                self.dir_b.name if self.dir_b is not None else "---",
+            )
         )
 
     def __repr__(self):
