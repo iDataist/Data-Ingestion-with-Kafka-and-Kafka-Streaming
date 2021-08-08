@@ -31,7 +31,7 @@ class Turnstile(Producer):
         )
 
         super().__init__(
-            f"{station_name}.turnstile.v1",
+            "org.cta.turnstile.v1",
             key_schema=Turnstile.key_schema,
             value_schema=Turnstile.value_schema,
         )
